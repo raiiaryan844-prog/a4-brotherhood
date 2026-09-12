@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tripathi Grocery Store - Fresh, Fast and Affordable groceries.">
+    <title>TRIPATHI GROCERY STORE</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #16a34a;
+            --primary-dark: #15803d;
+            --secondary: #f59e0b;
+            --bg: #f5f7f6;
+            --card: #ffffff;
+            --text: #172018;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --danger: #dc2626;
+            --shadow: 0 10px 30px rgba(0,0,0,.08);
+        }
+
+        body.dark {
+            --bg: #0d1110;
+            --card: #151b18;
+            --text: #f4f7f5;
+            --muted: #a7b0aa;
+            --border: #29332e;
+            --shadow: 0 10px 30px rgba(0,0,0,.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: .3s;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 15px rgba(0,0,0,.04);
+        }
+
+        .navbar {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: var(--primary);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-size: 23px;
+        }
+
+        .brand h1 {
+            font-size: 19px;
+            line-height: 1.1;
+        }
+
+        .brand small {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        nav a {
+            font-size: 14px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -6px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            min-width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            font-size: 11px;
+            display: grid;
+            place-items: center;
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* HERO */
+        .hero {
+            padding: 75px 0;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(22,163,74,.2), transparent 35%),
+                linear-gradient(135deg, var(--bg), var(--card));
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            align-items: center;
+            gap: 45px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 30px;
+            background: rgba(22,163,74,.12);
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .hero h2 {
+            font-size: clamp(38px, 6vw, 68px);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 600px;
+            font-size: 17px;
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+        }
+
+        .hero-card {
+            min-height: 340px;
+            border-radius: 25px;
+            background: linear-gradient(145deg, #15803d, #22c55e);
+            color: white;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card .big-icon {
+            font-size: 75px;
+            margin-bottom: 15px;
+        }
+
+        .hero-card h3 {
+            font-size: 28px;
+        }
+
+        /* BENEFITS */
+        .benefits {
+            padding: 35px 0;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .benefit {
+            padding: 22px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .benefit h3 {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .benefit p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* SECTION */
+        section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            margin-bottom: 7px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        /* CATEGORIES */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+
+        .category {
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 15px;
+            padding: 18px 10px;
+            text-align: center;
+            transition: .2s;
+        }
+
+        .category:hover,
+        .category.active {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .category-icon {
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .category span {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* PRODUCTS */
+        .shop-tools {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .search-box {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 17px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            border-radius: 11px;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+        }
+
+        .sort-select {
+            padding: 0 14px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            background: var(--card);
+            color: var(--text);
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .product {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            overflow: hidden;
+            transition: .25s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .product-image {
+            height: 165px;
+            background: linear-gradient(135deg, #e9f7ed, #f7fff8);
+            display: grid;
+            place-items: center;
+            font-size: 70px;
+            position: relative;
+        }
+
+        body.dark .product-image {
+            background: #1b2821;
+        }
+
+        .discount {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--danger);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 7px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-category {
+            color: var(--primary);
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .product h3 {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .unit {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 12px;
+            gap: 8px;
+        }
+
+        .price strong {
+            font-size: 18px;
+        }
+
+        .old-price {
+            color: var(--muted);
+            text-decoration: line-through;
+            font-size: 11px;
+            margin-left: 4px;
+        }
+
+        .add-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 11px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .no-results {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
+        }
+
+        /* DEAL */
+        .deal {
+            background: var(--primary);
+            color: white;
+            border-radius: 25px;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .deal h2 {
+            font-size: 34px;
+        }
+
+        .deal p {
+            opacity: .9;
+        }
+
+        .deal .btn {
+            background: white;
+            color: var(--primary-dark);
+            white-space: nowrap;
+        }
+
+        /* REVIEWS */
+        .reviews {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .review {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 17px;
+        }
+
+        .stars {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .review p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .review strong {
+            font-size: 13px;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border);
+            background: var(--card);
+            margin-bottom: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: var(--text);
+            padding: 17px;
+            display: flex;
+            justify-content: space-between;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 17px 17px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        /* CONTACT */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(22,163,74,.12);
+            display: grid;
+            place-items: center;
+        }
+
+        .contact-item h4 {
+            font-size: 14px;
+        }
+
+        .contact-item p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #101512;
+            color: white;
+            padding: 45px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        footer p,
+        footer a {
+            color: #aeb8b2;
+            font-size: 13px;
+        }
+
+        footer h3 {
+            margin-bottom: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .copyright {
+            border-top: 1px solid #29312d;
+            margin-top: 30px;
+            padding-top: 18px;
+            text-align: center;
+            color: #8e9992;
+            font-size: 12px;
+        }
+
+        /* CART DRAWER */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.5);
+            z-index: 1999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            right: -430px;
+            top: 0;
+            height: 100vh;
+            width: min(430px, 100%);
+            background: var(--card);
+            z-index: 2000;
+            box-shadow: -10px 0 40px rgba(0,0,0,.2);
+            transition: .3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 48px 1fr auto;
+            gap: 10px;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding: 13px 0;
+        }
+
+        .cart-item-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(22,163,74,.1);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            font-size: 25px;
+        }
+
+        .cart-item h4 {
+            font-size: 13px;
+        }
+
+        .cart-item p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .qty {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 5px;
+        }
+
+        .qty button {
+            width: 23px;
+            height: 23px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            border-radius: 5px;
+        }
+
+        .remove {
+            color: var(--danger);
+            border: none;
+            background: transparent;
+            font-size: 11px;
+        }
+
+        .cart-footer {
+            padding: 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .grand-total {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0 15px;
+        }
+
+        .full-btn {
+            width: 100%;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 15px;
+            color: var(--muted);
+        }
+
+        .empty-cart div {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        /* MODAL */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.55);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            width: min(620px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: var(--card);
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            border: none;
+            background: transparent;
+            color: var(--text);
+            font-size: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 13px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group.full {
+            grid-column: 1/-1;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            border-radius: 9px;
+            padding: 11px;
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .checkout-summary {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 18px 0;
+        }
+
+        /* ADMIN */
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            padding: 22px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 15px;
+        }
+
+        .stat p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .stat strong {
+            font-size: 28px;
+        }
+
+        .order-list {
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .order {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            padding: 13px 0;
+            font-size: 13px;
+        }
+
+        .order:last-child {
+            border: none;
+        }
+
+        .status {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 25px;
+            transform: translate(-50%, 100px);
+            background: #101512;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 10px;
+            z-index: 5000;
+            opacity: 0;
+            transition: .3s;
+            font-size: 13px;
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+
+        /* MOBILE */
+        @media (max-width: 900px) {
+            nav {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                padding: 20px;
+                background: var(--card);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+            }
+
+            nav.show {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: grid;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefit-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .categories {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .hero {
+                padding: 50px 0;
+            }
+
+            .hero h2 {
+                font-size: 42px;
+            }
+
+            .benefit-grid,
+            .categories,
+            .products,
+            .reviews,
+            .contact-grid,
+            .footer-grid,
+            .admin-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .products {
+                gap: 10px;
+            }
+
+            .product-image {
+                height: 130px;
+                font-size: 52px;
+            }
+
+            .shop-tools {
+                flex-direction: column;
+            }
+
+            .sort-select {
+                height: 45px;
+            }
+
+            .deal {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .products {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .categories {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .product-info {
+                padding: 10px;
+            }
+
+            .product h3 {
+                font-size: 13px;
+            }
+
+            .price strong {
+                font-size: 15px;
+            }
+
+            .add-btn {
+                padding: 7px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container navbar">
+            <a href="#home" class="brand">
+                <div class="brand-logo">🛒</div>
+                <div>
+                    <h1>TRIPATHI GROCERY STORE</h1>
+                    <small>Fresh • Fast • Affordable</small>
+                </div>
+            </a>
+
+            <nav id="nav">
+                <a href="#home">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#deals">Deals</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
+                <a href="#admin">Owner</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="themeBtn" title="Toggle theme">🌙</button>
+                <button class="icon-btn" id="cartBtn" title="Shopping cart">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="icon-btn menu-btn" id="menuBtn">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <main id="home">
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <span class="badge">🟢 YOUR LOCAL GROCERY PARTNER</span>
+                    <h2>Fresh groceries,<br><span>delivered simply.</span></h2>
+                    <p>
+                        Welcome to TRIPATHI GROCERY STORE.
+                        Find everyday essentials, snacks, beverages,
+                        fruits, vegetables and household products in one place.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#shop" class="btn btn-primary">🛍️ Shop Now</a>
+                        <a href="#contact" class="btn btn-outline">📞 Contact Store</a>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <div class="big-icon">🥦🛒</div>
+                    <h3>Daily Grocery Deals</h3>
+                    <p>Quality products at friendly local prices.</p>
+                    <br>
+                    <strong>Shop smart. Eat fresh. 💚</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFITS -->
+        <section class="benefits">
+            <div class="container benefit-grid">
+                <div class="benefit">
+                    <div class="benefit-icon">🥬</div>
+                    <h3>Fresh Products</h3>
+                    <p>Quality everyday essentials.</p>
+                </div>
+
+                <div class="benefit">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Quick Ordering</h3>
+                    <p>Easy online order process.</p>
+                </div>
+
+                <div class="benefit">
+                    <div class="benefit-icon">💰</div>
+                    <h3>Great Prices</h3>
+                    <p>Affordable local shopping.</p>
+                </div>
+
+                <div class="benefit">
+                    <div class="benefit-icon">🤝</div>
+                    <h3>Local Service</h3>
+                    <p>Friendly customer support.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORIES -->
+        <section>
+            <div class="container">
+                <div class="section-title">
+                    <h2>Shop by Category</h2>
+                    <p>Choose what you need.</p>
+                </div>
+
+                <div class="categories" id="categories">
+                    <button class="category active" data-category="All">
+                        <div class="category-icon">🛒</div>
+                        <span>All</span>
+                    </button>
+
+                    <button class="category" data-category="Fruits & Vegetables">
+                        <div class="category-icon">🥦</div>
+                        <span>Fruits & Veg</span>
+                    </button>
+
+                    <button class="category" data-category="Dairy & Bakery">
+                        <div class="category-icon">🥛</div>
+                        <span>Dairy</span>
+                    </button>
+
+                    <button class="category" data-category="Snacks">
+                        <div class="category-icon">🍪</div>
+                        <span>Snacks</span>
+                    </button>
+
+                    <button class="category" data-category="Beverages">
+                        <div class="category-icon">🥤</div>
+                        <span>Beverages</span>
+                    </button>
+
+                    <button class="category" data-category="Household">
+                        <div class="category-icon">🧹</div>
+                        <span>Household</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOP -->
+        <section id="shop">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Products</h2>
+                    <p>Pick your favourites and add them to your cart.</p>
+                </div>
+
+                <div class="shop-tools">
+                    <div class="search-box">
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="🔎 Search rice, milk, biscuits..."
+                        >
+                    </div>
+
+                    <select class="sort-select" id="sortSelect">
+                        <option value="default">Sort: Recommended</option>
+                        <option value="low">Price: Low to High</option>
+                        <option value="high">Price: High to Low</option>
+                        <option value="discount">Highest Discount</option>
+                    </select>
+                </div>
+
+                <div class="products" id="products"></div>
+            </div>
+        </section>
+
+        <!-- DEAL -->
+        <section id="deals">
+            <div class="container">
+                <div class="deal">
+                    <div>
+                        <h2>🔥 Today's Grocery Deal</h2>
+                        <p>Save more when you shop your everyday essentials.</p>
+                    </div>
+                    <a href="#shop" class="btn">View Products →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- REVIEWS -->
+        <section id="reviews">
+            <div class="container">
+                <div class="section-title">
+                    <h2>What Customers Say</h2>
+                    <p>Demo reviews for the website.</p>
+                </div>
+
+                <div class="reviews">
+                    <div class="review">
+                        <div class="stars">★★★★★</div>
+                        <p>
+                            “Good variety of daily grocery items and a very
+                            simple ordering experience.”
+                        </p>
+                        <strong>— Rahul</strong>
+                    </div>
+
+                    <div class="review">
+                        <div class="stars">★★★★★</div>
+                        <p>
+                            “The website is easy to use. I can quickly find
+                            products and check my cart.”
+                        </p>
+                        <strong>— Priya</strong>
+                    </div>
+
+                    <div class="review">
+                        <div class="stars">★★★★☆</div>
+                        <p>
+                            “A nice local-store shopping experience with
+                            useful categories and deals.”
+                        </p>
+                        <strong>— Amit</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section>
+            <div class="container">
+                <div class="section-title">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Quick answers for customers.</p>
+                </div>
+
+                <div class="faq">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Do you offer home delivery?
+                            <span>＋</span>
+                        </button>
+                        <div class="faq-answer">
+                            Home delivery can be enabled by the shop owner.
+                            Update the delivery information in the contact section.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How can I place an order?
+                            <span>＋</span>
+                        </button>
+                        <div class="faq-answer">
+                            Add products to your cart, open checkout,
+                            enter your details and use the generated order message.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Can I order through WhatsApp?
+                            <span>＋</span>
+                        </button>
+                        <div class="faq-answer">
+                            Yes. Add your products to the cart and use the
+                            WhatsApp order button after entering your details.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Are online payments supported?
+                            <span>＋</span>
+                        </button>
+                        <div class="faq-answer">
+                            This demo does not process real payments.
+                            A secure payment gateway can be connected later.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Visit TRIPATHI GROCERY STORE</h2>
+                    <p>Replace the demo information below with the real shop details.</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>Shop Address</h4>
+                                <p>YOUR SHOP ADDRESS HERE</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>YOUR PHONE NUMBER HERE</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🕘</div>
+                            <div>
+                                <h4>Opening Hours</h4>
+                                <p>9:00 AM – 9:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <h3>Need something quickly? ⚡</h3>
+                        <p style="color:var(--muted); margin:10px 0 20px;">
+                            Select your grocery items and prepare your order
+                            message in just a few clicks.
+                        </p>
+
+                        <a href="#shop" class="btn btn-primary">Start Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEMO ADMIN -->
+        <section id="admin">
+            <div class="container">
+                <div class="section-title">
+                    <h2>👨‍💼 Store Owner Dashboard</h2>
+                    <p>Frontend demo dashboard for the shop owner.</p>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="stat">
+                        <p>Total Products</p>
+                        <strong id="statProducts">0</strong>
+                    </div>
+
+                    <div class="stat">
+                        <p>Orders This Session</p>
+                        <strong id="statOrders">0</strong>
+                    </div>
+
+                    <div class="stat">
+                        <p>Estimated Sales</p>
+                        <strong id="statSales">₹0</strong>
+                    </div>
+                </div>
+
+                <div class="order-list">
+                    <h3>Recent Demo Orders</h3>
+                    <div id="ordersList">
+                        <p style="color:var(--muted); margin-top:10px;">
+                            No orders placed yet.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>🛒 TRIPATHI GROCERY STORE</h3>
+                    <p>
+                        Your local destination for groceries,
+                        everyday essentials and household products.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#shop">Shop</a>
+                        <a href="#deals">Deals</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Categories</h3>
+                    <div class="footer-links">
+                        <a href="#shop">Groceries</a>
+                        <a href="#shop">Snacks</a>
+                        <a href="#shop">Beverages</a>
+                        <a href="#shop">Household</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                © 2026 TRIPATHI GROCERY STORE. Website demo created for a local-store project.
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- CART -->
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h2>🛒 Your Cart</h2>
+            <button class="close-btn" id="closeCart">×</button>
+        </div>
+
+        <div class="cart-items" id="cartItems"></div>
+
+        <div class="cart-footer">
+            <div class="total-line">
+                <span>Subtotal</span>
+                <strong id="subtotal">₹0</strong>
+            </div>
+
+            <div class="total-line">
+                <span>Discount</span>
+                <strong id="discount">-₹0</strong>
+            </div>
+
+            <div class="total-line">
+                <span>Delivery</span>
+                <strong id="delivery">₹0</strong>
+            </div>
+
+            <div class="grand-total">
+                <span>Total</span>
+                <span id="grandTotal">₹0</span>
+            </div>
+
+            <button class="btn btn-primary full-btn" id="checkoutBtn">
+                Proceed to Checkout
+            </button>
+        </div>
+    </aside>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>📦 Checkout</h2>
+                <button class="close-btn" id="closeCheckout">×</button>
+            </div>
+
+            <form id="checkoutForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Customer Name *</label>
+                        <input id="customerName" required placeholder="Your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mobile Number *</label>
+                        <input
+                            id="customerPhone"
+                            required
+                            type="tel"
+                            placeholder="10-digit mobile number"
+                            pattern="[0-9]{10}"
+                        >
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Delivery Address *</label>
+                        <textarea
+                            id="customerAddress"
+                            required
+                            placeholder="House number, street, locality..."
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Landmark</label>
+                        <input id="landmark" placeholder="Nearby landmark">
+                    </div>
+                </div>
+
+                <div class="checkout-summary" id="checkoutSummary"></div>
+
+                <button class="btn btn-primary full-btn" type="submit">
+                    ✅ Place Order
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div class="modal" id="successModal">
+        <div class="modal-box" style="text-align:center;">
+            <div style="font-size:65px;">🎉</div>
+            <h2>Order Created!</h2>
+            <p id="successMessage" style="color:var(--muted); margin:12px 0 20px;"></p>
+
+            <button class="btn btn-primary" id="whatsappBtn">
+                📱 Order on WhatsApp
+            </button>
+
+            <button class="btn btn-outline" id="successClose" style="margin-left:7px;">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        /* ==========================================
+           TRIPATHI GROCERY STORE
+           FRONTEND DEMO APPLICATION
+           ========================================== */
+
+        const SHOP_NAME = "TRIPATHI GROCERY STORE";
+
+        // Replace this with the shop's real WhatsApp number.
+        // Use country code without + or spaces.
+        const SHOP_WHATSAPP = "YOUR_NUMBER_HERE";
+
+        const products = [
+            {
+                id: 1,
+                name: "Fresh Tomatoes",
+                category: "Fruits & Vegetables",
+                price: 40,
+                oldPrice: 50,
+                unit: "1 kg",
+                icon: "🍅",
+                discount: 20
+            },
+            {
+                id: 2,
+                name: "Fresh Potatoes",
+                category: "Fruits & Vegetables",
+                price: 35,
+                oldPrice: 45,
+                unit: "1 kg",
+                icon: "🥔",
+                discount: 22
+            },
+            {
+                id: 3,
+                name: "Bananas",
+                category: "Fruits & Vegetables",
+                price: 50,
+                oldPrice: 60,
+                unit: "1 dozen",
+                icon: "🍌",
+                discount: 17
+            },
+            {
+                id: 4,
+                name: "Fresh Apples",
+                category: "Fruits & Vegetables",
+                price: 120,
+                oldPrice: 145,
+                unit: "1 kg",
+                icon: "🍎",
+                discount: 17
+            },
+            {
+                id: 5,
+                name: "Full Cream Milk",
+                category: "Dairy & Bakery",
+                price: 32,
+                oldPrice: 35,
+                unit: "500 ml",
+                icon: "🥛",
+                discount: 9
+            },
+            {
+                id: 6,
+                name: "Fresh Curd",
+                category: "Dairy & Bakery",
+                price: 45,
+                oldPrice: 55,
+                unit: "400 g",
+                icon: "🥣",
+                discount: 18
+            },
+            {
+                id: 7,
+                name: "White Bread",
+                category: "Dairy & Bakery",
+                price: 40,
+                oldPrice: 45,
+                unit: "400 g",
+                icon: "🍞",
+                discount: 11
+            },
+            {
+                id: 8,
+                name: "Butter",
+                category: "Dairy & Bakery",
+                price: 55,
+                oldPrice: 65,
+                unit: "100 g",
+                icon: "🧈",
+                discount: 15
+            },
+            {
+                id: 9,
+                name: "Potato Chips",
+                category: "Snacks",
+                price: 20,
+                oldPrice: 25,
+                unit: "52 g",
+                icon: "🥔",
+                discount: 20
+            },
+            {
+                id: 10,
+                name: "Cream Biscuits",
+                category: "Snacks",
+                price: 30,
+                oldPrice: 35,
+                unit: "120 g",
+                icon: "🍪",
+                discount: 14
+            },
+            {
+                id: 11,
+                name: "Namkeen",
+                category: "Snacks",
+                price: 45,
+                oldPrice: 55,
+                unit: "200 g",
+                icon: "🥨",
+                discount: 18
+            },
+            {
+                id: 12,
+                name: "Instant Noodles",
+                category: "Snacks",
+                price: 70,
+                oldPrice: 80,
+                unit: "4 pack",
+                icon: "🍜",
+                discount: 13
+            },
+            {
+                id: 13,
+                name: "Cola Drink",
+                category: "Beverages",
+                price: 45,
+                oldPrice: 50,
+                unit: "750 ml",
+                icon: "🥤",
+                discount: 10
+            },
+            {
+                id: 14,
+                name: "Orange Juice",
+                category: "Beverages",
+                price: 85,
+                oldPrice: 100,
+                unit: "1 litre",
+                icon: "🧃",
+                discount: 15
+            },
+            {
+                id: 15,
+                name: "Mineral Water",
+                category: "Beverages",
+                price: 20,
+                oldPrice: 25,
+                unit: "1 litre",
+                icon: "💧",
+                discount: 20
+            },
+            {
+                id: 16,
+                name: "Tea",
+                category: "Beverages",
+                price: 180,
+                oldPrice: 210,
+                unit: "250 g",
+                icon: "🍵",
+                discount: 14
+            },
+            {
+                id: 17,
+                name: "Basmati Rice",
+                category: "Fruits & Vegetables",
+                price: 220,
+                oldPrice: 260,
+                unit: "5 kg",
+                icon: "🍚",
+                discount: 15
+            },
+            {
+                id: 18,
+                name: "Wheat Flour",
+                category: "Fruits & Vegetables",
+                price: 230,
+                oldPrice: 250,
+                unit: "5 kg",
+                icon: "🌾",
+                discount: 8
+            },
+            {
+                id: 19,
+                name: "Toor Dal",
+                category: "Fruits & Vegetables",
+                price: 145,
+                oldPrice: 165,
+                unit: "1 kg",
+                icon: "🫘",
+                discount: 12
+            },
+            {
+                id: 20,
+                name: "Sugar",
+                category: "Fruits & Vegetables",
+                price: 48,
+                oldPrice: 55,
+                unit: "1 kg",
+                icon: "🍚",
+                discount: 13
+            },
+            {
+                id: 21,
+                name: "Bath Soap",
+                category: "Household",
+                price: 38,
+                oldPrice: 45,
+                unit: "100 g",
+                icon: "🧼",
+                discount: 16
+            },
+            {
+                id: 22,
+                name: "Dishwash Liquid",
+                category: "Household",
+                price: 110,
+                oldPrice: 130,
+                unit: "500 ml",
+                icon: "🧽",
+                discount: 15
+            },
+            {
+                id: 23,
+                name: "Laundry Powder",
+                category: "Household",
+                price: 180,
+                oldPrice: 210,
+                unit: "1 kg",
+                icon: "🧺",
+                discount: 14
+            },
+            {
+                id: 24,
+                name: "Floor Cleaner",
+                category: "Household",
+                price: 125,
+                oldPrice: 150,
+                unit: "1 litre",
+                icon: "🧹",
+                discount: 17
+            },
+            {
+                id: 25,
+                name: "Cooking Oil",
+                category: "Household",
+                price: 145,
+                oldPrice: 165,
+                unit: "1 litre",
+                icon: "🫗",
+                discount: 12
+            },
+            {
+                id: 26,
+                name: "Salt",
+                category: "Household",
+                price: 25,
+                oldPrice: 30,
+                unit: "1 kg",
+                icon: "🧂",
+                discount: 17
+            },
+            {
+                id: 27,
+                name: "Toothpaste",
+                category: "Household",
+                price: 85,
+                oldPrice: 100,
+                unit: "150 g",
+                icon: "🪥",
+                discount: 15
+            },
+            {
+                id: 28,
+                name: "Shampoo",
+                category: "Household",
+                price: 120,
+                oldPrice: 145,
+                unit: "180 ml",
+                icon: "🧴",
+                discount: 17
+            },
+            {
+                id: 29,
+                name: "Corn Flakes",
+                category: "Snacks",
+                price: 160,
+                oldPrice: 190,
+                unit: "300 g",
+                icon: "🥣",
+                discount: 16
+            },
+            {
+                id: 30,
+                name: "Chocolate",
+                category: "Snacks",
+                price: 50,
+                oldPrice: 60,
+                unit: "100 g",
+                icon: "🍫",
+                discount: 17
+            }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem("tripathiCart")) || [];
+        let orders = JSON.parse(localStorage.getItem("tripathiOrders")) || [];
+        let selectedCategory = "All";
+        let currentOrder = null;
+
+        const productsEl = document.getElementById("products");
+        const searchInput = document.getElementById("searchInput");
+        const sortSelect = document.getElementById("sortSelect");
+        const cartCount = document.getElementById("cartCount");
+        const cartDrawer = document.getElementById("cartDrawer");
+        const overlay = document.getElementById("overlay");
+        const toast = document.getElementById("toast");
+
+        /* ==========================
+           PRODUCT RENDERING
+           ========================== */
+
+        function renderProducts() {
+            let list = [...products];
+
+            const search = searchInput.value.toLowerCase().trim();
+
+            if (selectedCategory !== "All") {
+                list = list.filter(
+                    product => product.category === selectedCategory
+                );
+            }
+
+            if (search) {
+                list = list.filter(product =>
+                    product.name.toLowerCase().includes(search) ||
+                    product.category.toLowerCase().includes(search)
+                );
+            }
+
+            if (sortSelect.value === "low") {
+                list.sort((a, b) => a.price - b.price);
+            }
+
+            if (sortSelect.value === "high") {
+                list.sort((a, b) => b.price - a.price);
+            }
+
+            if (sortSelect.value === "discount") {
+                list.sort((a, b) => b.discount - a.discount);
+            }
+
+            if (!list.length) {
+                productsEl.innerHTML = `
+                    <div class="no-results">
+                        <div style="font-size:45px;">🔎</div>
+                        <h3>No products found</h3>
+                        <p>Try another search or category.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            productsEl.innerHTML = list.map(product => `
+                <article class="product">
+                    <div class="product-image">
+                        <span class="discount">${product.discount}% OFF</span>
+                        ${product.icon}
+                    </div>
+
+                    <div class="product-info">
+                        <span class="product-category">
+                            ${product.category}
+                        </span>
+
+                        <h3>${product.name}</h3>
+
+                        <span class="unit">${product.unit}</span>
+
+                        <div class="price-row">
+                            <div class="price">
+                                <strong>₹${product.price}</strong>
+                                <span class="old-price">
+                                    ₹${product.oldPrice}
+                                </span>
+                            </div>
+
+                            <button
+                                class="add-btn"
+                                onclick="addToCart(${product.id})"
+                            >
+                                + Add
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            `).join("");
+        }
+
+        /* ==========================
+           CART
+           ========================== */
+
+        function addToCart(id) {
+            const existing = cart.find(item => item.id === id);
+
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({
+                    id: id,
+                    quantity: 1
+                });
+            }
+
+            saveCart();
+            renderCart();
+            showToast("Added to cart 🛒");
+        }
+
+        function changeQuantity(id, amount) {
+            const item = cart.find(item => item.id === id);
+
+            if (!item) return;
+
+            item.quantity += amount;
+
+            if (item.quantity <= 0) {
+                cart = cart.filter(item => item.id !== id);
+            }
+
+            saveCart();
+            renderCart();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            renderCart();
+            showToast("Item removed");
+        }
+
+        function saveCart() {
+            localStorage.setItem(
+                "tripathiCart",
+                JSON.stringify(cart)
+            );
+        }
+
+        function getCartDetails() {
+            return cart.map(item => {
+                const product = products.find(p => p.id === item.id);
+
+                return {
+                    ...product,
+                    quantity: item.quantity,
+                    lineTotal: product.price * item.quantity
+                };
+            });
+        }
+
+        function calculateTotals() {
+            const items = getCartDetails();
+
+            const subtotal = items.reduce(
+                (sum, item) => sum + item.lineTotal,
+                0
+            );
+
+            const discount = subtotal >= 500
+                ? Math.round(subtotal * 0.05)
+                : 0;
+
+            const delivery = subtotal === 0
+                ? 0
+                : subtotal >= 300
+                    ? 0
+                    : 30;
+
+            const total = subtotal - discount + delivery;
+
+            return {
+                subtotal,
+                discount,
+                delivery,
+                total
+            };
+        }
+
+        function renderCart() {
+            const items = getCartDetails();
+
+            const itemCount = items.reduce(
+                (sum, item) => sum + item.quantity,
+                0
+            );
+
+            cartCount.textContent = itemCount;
+
+            if (!items.length) {
+                document.getElementById("cartItems").innerHTML = `
+                    <div class="empty-cart">
+                        <div>🛒</div>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some grocery products to continue.</p>
+                    </div>
+                `;
+            } else {
+                document.getElementById("cartItems").innerHTML =
+                    items.map(item => `
+                        <div class="cart-item">
+                            <div class="cart-item-icon">
+                                ${item.icon}
+                            </div>
+
+                            <div>
+                                <h4>${item.name}</h4>
+                                <p>₹${item.price} × ${item.quantity}</p>
+
+                                <div class="qty">
+                                    <button
+                                        onclick="changeQuantity(${item.id}, -1)"
+                                    >−</button>
+
+                                    <span>${item.quantity}</span>
+
+                                    <button
+                                        onclick="changeQuantity(${item.id}, 1)"
+                                    >+</button>
+
+                                    <button
+                                        class="remove"
+                                        onclick="removeFromCart(${item.id})"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+
+                            <strong>₹${item.lineTotal}</strong>
+                        </div>
+                    `).join("");
+            }
+
+            const totals = calculateTotals();
+
+            document.getElementById("subtotal").textContent =
+                `₹${totals.subtotal}`;
+
+            document.getElementById("discount").textContent =
+                `-₹${totals.discount}`;
+
+            document.getElementById("delivery").textContent =
+                totals.delivery === 0
+                    ? "FREE"
+                    : `₹${totals.delivery}`;
+
+            document.getElementById("grandTotal").textContent =
+                `₹${totals.total}`;
+
+            updateDashboard();
+        }
+
+        /* ==========================
+           CART UI
+           ========================== */
+
+        function openCart() {
+            cartDrawer.classList.add("open");
+            overlay.classList.add("show");
+        }
+
+        function closeCart() {
+            cartDrawer.classList.remove("open");
+            overlay.classList.remove("show");
+        }
+
+        document.getElementById("cartBtn").addEventListener(
+            "click",
+            openCart
+        );
+
+        document.getElementById("closeCart").addEventListener(
+            "click",
+            closeCart
+        );
+
+        overlay.addEventListener(
+            "click",
+            closeCart
+        );
+
+        /* ==========================
+           CHECKOUT
+           ========================== */
+
+        function openCheckout() {
+            if (!cart.length) {
+                showToast("Your cart is empty 🛒");
+                return;
+            }
+
+            closeCart();
+
+            const items = getCartDetails();
+            const totals = calculateTotals();
+
+            document.getElementById("checkoutSummary").innerHTML = `
+                <strong>Order Summary</strong>
+
+                <div style="margin-top:10px;">
+                    ${items.map(item => `
+                        <div class="total-line">
+                            <span>
+                                ${item.icon} ${item.name}
+                                × ${item.quantity}
+                            </span>
+                            <strong>₹${item.lineTotal}</strong>
+                        </div>
+                    `).join("")}
+                </div>
+
+                <hr style="border:none;border-top:1px solid var(--border);margin:10px 0;">
+
+                <div class="total-line">
+                    <span>Subtotal</span>
+                    <strong>₹${totals.subtotal}</strong>
+                </div>
+
+                <div class="total-line">
+                    <span>Discount</span>
+                    <strong>-₹${totals.discount}</strong>
+                </div>
+
+                <div class="total-line">
+                    <span>Delivery</span>
+                    <strong>
+                        ${totals.delivery === 0
+                            ? "FREE"
+                            : "₹" + totals.delivery}
+                    </strong>
+                </div>
+
+                <div class="grand-total">
+                    Total: ₹${totals.total}
+                </div>
+            `;
+
+            document.getElementById("checkoutModal")
+                .classList.add("show");
+        }
+
+        document.getElementById("checkoutBtn")
+            .addEventListener("click", openCheckout);
+
+        document.getElementById("closeCheckout")
+            .addEventListener("click", () => {
+                document.getElementById("checkoutModal")
+                    .classList.remove("show");
+            });
+
+        document.getElementById("checkoutForm")
+            .addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const name =
+                    document.getElementById("customerName").value.trim();
+
+                const phone =
+                    document.getElementById("customerPhone").value.trim();
+
+                const address =
+                    document.getElementById("customerAddress").value.trim();
+
+                const landmark =
+                    document.getElementById("landmark").value.trim();
+
+                if (!name || !phone || !address) {
+                    showToast("Please fill all required fields.");
+                    return;
+                }
+
+                const totals = calculateTotals();
+
+                const order = {
+                    id: "TGS-" + Date.now().toString().slice(-6),
+                    name,
+                    phone,
+                    address,
+                    landmark,
+                    items: getCartDetails(),
+                    total: totals.total,
+                    createdAt: new Date().toLocaleString()
+                };
+
+                orders.unshift(order);
+
+                localStorage.setItem(
+                    "tripathiOrders",
+                    JSON.stringify(orders)
+                );
+
+                currentOrder = order;
+
+                cart = [];
+                saveCart();
+                renderCart();
+
+                document.getElementById("checkoutModal")
+                    .classList.remove("show");
+
+                document.getElementById("successMessage").textContent =
+                    `Your order ${order.id} has been created successfully. Total amount: ₹${order.total}.`;
+
+                document.getElementById("successModal")
+                    .classList.add("show");
+
+                document.getElementById("checkoutForm").reset();
+
+                updateDashboard();
+            });
+
+        /* ==========================
+           WHATSAPP ORDER
+           ========================== */
+
+        document.getElementById("whatsappBtn")
+            .addEventListener("click", function() {
+
+                if (!currentOrder) return;
+
+                if (SHOP_WHATSAPP === "YOUR_NUMBER_HERE") {
+                    showToast("Set the shop WhatsApp number in the code.");
+                    return;
+                }
+
+                const itemText = currentOrder.items
+                    .map(item =>
+                        `${item.name} x ${item.quantity} = ₹${item.lineTotal}`
+                    )
+                    .join("\n");
+
+                const message =
+`Hello ${SHOP_NAME},
+
+I would like to place this order.
+
+Order ID: ${currentOrder.id}
+
+Customer: ${currentOrder.name}
+Phone: ${currentOrder.phone}
+
+Items:
+${itemText}
+
+Total: ₹${currentOrder.total}
+
+Address:
+${currentOrder.address}
+
+Landmark:
+${currentOrder.landmark || "Not provided"}
+
+Thank you!`;
+
+                const url =
+                    "https://wa.me/" +
+                    SHOP_WHATSAPP +
+                    "?text=" +
+                    encodeURIComponent(message);
+
+                window.open(url, "_blank");
+            });
+
+        document.getElementById("successClose")
+            .addEventListener("click", function() {
+                document.getElementById("successModal")
+                    .classList.remove("show");
+            });
+
+        /* ==========================
+           SEARCH & FILTER
+           ========================== */
+
+        searchInput.addEventListener(
+            "input",
+            renderProducts
+        );
+
+        sortSelect.addEventListener(
+            "change",
+            renderProducts
+        );
+
+        document.querySelectorAll(".category")
+            .forEach(button => {
+
+                button.addEventListener("click", function() {
+
+                    document.querySelectorAll(".category")
+                        .forEach(btn =>
+                            btn.classList.remove("active")
+                        );
+
+                    this.classList.add("active");
+
+                    selectedCategory =
+                        this.dataset.category;
+
+                    renderProducts();
+                });
+            });
+
+        /* ==========================
+           THEME
+           ========================== */
+
+        const savedTheme =
+            localStorage.getItem("tripathiTheme");
+
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark");
+            document.getElementById("themeBtn").textContent = "☀️";
+        }
+
+        document.getElementById("themeBtn")
+            .addEventListener("click", function() {
+
+                document.body.classList.toggle("dark");
+
+                const isDark =
+                    document.body.classList.contains("dark");
+
+                localStorage.setItem(
+                    "tripathiTheme",
+                    isDark ? "dark" : "light"
+                );
+
+                this.textContent =
+                    isDark ? "☀️" : "🌙";
+            });
+
+        /* ==========================
+           MOBILE NAVIGATION
+           ========================== */
+
+        document.getElementById("menuBtn")
+            .addEventListener("click", function() {
+
+                document.getElementById("nav")
+                    .classList.toggle("show");
+            });
+
+        document.querySelectorAll("nav a")
+            .forEach(link => {
+                link.addEventListener("click", () => {
+                    document.getElementById("nav")
+                        .classList.remove("show");
+                });
+            });
+
+        /* ==========================
+           FAQ
+           ========================== */
+
+        document.querySelectorAll(".faq-question")
+            .forEach(button => {
+
+                button.addEventListener("click", function() {
+
+                    const item =
+                        this.parentElement;
+
+                    item.classList.toggle("open");
+
+                    this.querySelector("span")
+                        .textContent =
+                        item.classList.contains("open")
+                            ? "−"
+                            : "＋";
+                });
+            });
+
+        /* ==========================
+           TOAST
+           ========================== */
+
+        let toastTimer;
+
+        function showToast(message) {
+
+            toast.textContent = message;
+
+            toast.classList.add("show");
+
+            clearTimeout(toastTimer);
+
+            toastTimer = setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2200);
+        }
+
+        /* ==========================
+           ADMIN DASHBOARD
+           ========================== */
+
+        function updateDashboard() {
+
+            document.getElementById("statProducts")
+                .textContent = products.length;
+
+            document.getElementById("statOrders")
+                .textContent = orders.length;
+
+            const sales = orders.reduce(
+                (sum, order) => sum + order.total,
+                0
+            );
+
+            document.getElementById("statSales")
+                .textContent = `₹${sales}`;
+
+            const list =
+                document.getElementById("ordersList");
+
+            if (!orders.length) {
+                list.innerHTML = `
+                    <p style="color:var(--muted);margin-top:10px;">
+                        No orders placed yet.
+                    </p>
+                `;
+                return;
+            }
+
+            list.innerHTML = orders
+                .slice(0, 8)
+                .map(order => `
+                    <div class="order">
+                        <div>
+                            <strong>${order.id}</strong><br>
+                            ${order.name}
+                        </div>
+
+                        <div style="text-align:right;">
+                            <strong>₹${order.total}</strong><br>
+                            <span class="status">Created</span>
+                        </div>
+                    </div>
+                `)
+                .join("");
+        }
+
+        /* ==========================
+           INITIALIZE
+           ========================== */
+
+        renderProducts();
+        renderCart();
+        updateDashboard();
+
+    </script>
+</body>
+</html>
